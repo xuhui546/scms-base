@@ -1,4 +1,4 @@
-FROM docker.io/xuhui546/anaconda3-centos7:anaconda3-4.1.1
+FROM docker.io/xuhui546/anaconda-centos:3.4.1.1
 
 RUN yum install -y epel-release; yum clean all
 RUN yum install -y python-devel; yum clean all

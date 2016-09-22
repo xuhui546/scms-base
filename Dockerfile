@@ -7,6 +7,7 @@ RUN yum install -y freetds*; yum clean all
 RUN yum install -y unixODBC*; yum clean all
 RUN yum install -y libaio*; yum clean all
 RUN yum install -y unzip; yum clean all
+RUN yum install -y nginx-1.10.1; yum clean all
 
 RUN mkdir /opt/oracle \
     && cd /opt/oracle \

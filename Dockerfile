@@ -3,9 +3,13 @@ FROM docker.io/xuhui546/anaconda-centos:3.4.1.1
 RUN yum install -y epel-release; yum clean all
 RUN yum install -y python-devel; yum clean all
 RUN yum install -y gcc gcc-c++; yum clean all
+# for database
 RUN yum install -y freetds*; yum clean all
 RUN yum install -y unixODBC*; yum clean all
 RUN yum install -y libaio*; yum clean all
+# for phantomjs
+RUN yum install -y freetype freetype-devel fontconfig-devel; yum clean all
+
 RUN yum install -y unzip; yum clean all
 RUN yum install -y nginx-1.10.1; yum clean all
 
@@ -23,6 +27,12 @@ RUN mkdir /opt/oracle \
 ENV LD_RUN_PATH /opt/oracle/instantclient_12_1
 ENV ORACLE_HOME /opt/oracle/instantclient_12_1
 ENV LD_LIBRARY_PATH /opt/oracle/instantclient_12_1
+
+RUN mkdir /opt/phantomjs \
+    && cd /opt/phantomjs && wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2 \
+    && tar -xjvf phantomjs-1.9.8-linux-x86_64.tar.bz2 --strip-components 1 \
+    && ln -s /opt/phantomjs/bin/phantomjs /usr/bin/phantomjs \
+    && rm /opt/phantomjs/phantomjs-1.9.8-linux-x86_64.tar.bz2
 
 RUN pip install \
     celery==3.1.23\

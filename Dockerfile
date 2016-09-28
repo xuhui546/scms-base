@@ -9,6 +9,8 @@ RUN yum install -y unixODBC*; yum clean all
 RUN yum install -y libaio*; yum clean all
 # for phantomjs
 RUN yum install -y freetype freetype-devel fontconfig-devel; yum clean all
+# for ImageMagick
+RUN yum install -y ImageMagick bitmap-fonts bitmap-fonts-cjk; yum clean all
 
 RUN yum install -y unzip; yum clean all
 RUN yum install -y nginx-1.10.1; yum clean all
@@ -28,7 +30,7 @@ ENV LD_RUN_PATH /opt/oracle/instantclient_12_1
 ENV ORACLE_HOME /opt/oracle/instantclient_12_1
 ENV LD_LIBRARY_PATH /opt/oracle/instantclient_12_1
 
-RUN mkdir /opt/phantomjs \
+RUN mkdir -p /opt/phantomjs \
     && cd /opt/phantomjs && wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2 \
     && tar -xjvf phantomjs-1.9.8-linux-x86_64.tar.bz2 --strip-components 1 \
     && ln -s /opt/phantomjs/bin/phantomjs /usr/bin/phantomjs \
